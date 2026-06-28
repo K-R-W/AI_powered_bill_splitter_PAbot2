@@ -29,3 +29,6 @@ google-services.json
 # Claude Code internal tooling
 .agent/
 .claude/settings.local.json
+
+# Internal project notes
+PUBLISHING.md

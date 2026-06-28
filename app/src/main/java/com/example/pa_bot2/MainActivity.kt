@@ -38,7 +38,6 @@ import com.example.pa_bot2.model.Bill
 import com.example.pa_bot2.model.AppDatabase
 import com.example.pa_bot2.model.BillRepository
 import com.example.pa_bot2.model.SettingsRepository
-import com.example.pa_bot2.util.SplitwiseAuthHandler
 import kotlinx.coroutines.launch
 
 import android.content.Intent
@@ -72,23 +71,12 @@ class MainActivity : ComponentActivity() {
             }
         }
         
-        // Handle initial intent if app was started via deep link
-        intent?.data?.let { uri ->
-            if (uri.host == "localhost" && uri.port == 8080 && uri.path == "/splitwise-callback") {
-                handleSplitwiseCallback(uri)
-            }
-        }
     }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
         handleIntent(intent)
-        intent.data?.let { uri ->
-            if (uri.host == "localhost" && uri.port == 8080 && uri.path == "/splitwise-callback") {
-                handleSplitwiseCallback(uri)
-            }
-        }
     }
 
     private fun handleIntent(intent: Intent?) {
@@ -120,18 +108,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun handleSplitwiseCallback(uri: android.net.Uri) {
-        val settingsRepository = SettingsRepository(this)
-        val authHandler = SplitwiseAuthHandler(
-            context = this,
-            settingsRepository = settingsRepository,
-            scope = lifecycleScope,
-            onStarted = {},
-            onFinished = {},
-            onError = { /* Log error or show toast */ }
-        )
-        authHandler.handleRedirect(uri)
-    }
 }
 
 @Composable
