@@ -1,0 +1,31 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/.idea/deploymentTargetSelector.xml
+/.idea/deviceManager.xml
+/.idea/runConfigurations.xml
+/.idea/markdown.xml
+/.idea/planningMode.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Secrets — keep .env.template committed, never .env
+.env
+keystore.properties
+*.keystore
+*.jks
+google-services.json
+
+# Claude Code internal tooling
+.agent/
+.claude/settings.local.json
