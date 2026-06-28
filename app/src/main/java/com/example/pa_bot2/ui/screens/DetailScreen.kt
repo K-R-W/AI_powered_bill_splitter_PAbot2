@@ -183,16 +183,6 @@ fun DetailScreen(
                             }
                         }
                     }
-                    if (splitwiseToken != null) {
-                        AppTooltip(if (draftBill.splitwiseGroupId == null) "Link to Splitwise group" else "Change Splitwise group") {
-                            IconButton(onClick = { showGroupSelector = true }) {
-                                Icon(
-                                    if (draftBill.splitwiseGroupId == null) Icons.Rounded.CloudSync else Icons.Rounded.SyncAlt,
-                                    contentDescription = "Splitwise group"
-                                )
-                            }
-                        }
-                    }
                     if (existingBill != null) {
                         AppTooltip("Delete this bill permanently") {
                             IconButton(onClick = { showDeleteConfirmation = true }) {
@@ -226,32 +216,44 @@ fun DetailScreen(
                     AppTooltip("Export this bill to your Splitwise group") {
                         ExtendedFloatingActionButton(
                             onClick = { if (canExportToSplitwise && !hasChanges) showSplitwiseExportDialog = true },
-                            icon = { 
-                                Icon(
-                                    Icons.Rounded.Send, 
-                                    contentDescription = null
-                                ) 
-                            },
-                            text = { 
-                                Text(if (hasChanges) "Save to Export" else "Send to Splitwise") 
-                            },
-                            containerColor = if (canExportToSplitwise && !hasChanges) 
-                                MaterialTheme.colorScheme.tertiaryContainer 
+                            icon = { Icon(Icons.Rounded.Send, contentDescription = null) },
+                            text = { Text(if (hasChanges) "Save to Export" else "Send to Splitwise") },
+                            containerColor = if (canExportToSplitwise && !hasChanges)
+                                MaterialTheme.colorScheme.tertiaryContainer
                             else MaterialTheme.colorScheme.surfaceVariant,
-                            contentColor = if (canExportToSplitwise && !hasChanges) 
-                                MaterialTheme.colorScheme.onTertiaryContainer 
+                            contentColor = if (canExportToSplitwise && !hasChanges)
+                                MaterialTheme.colorScheme.onTertiaryContainer
                             else MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     }
                 }
 
-                AppTooltip("Add a new item to the bill") {
-                    FloatingActionButton(
-                        onClick = { showAddItemDialog = true },
-                        containerColor = MaterialTheme.colorScheme.primary,
-                        contentColor = MaterialTheme.colorScheme.onPrimary
-                    ) {
-                        Icon(Icons.Rounded.Add, contentDescription = "Add Item")
+                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    if (splitwiseToken != null) {
+                        AppTooltip(if (draftBill.splitwiseGroupId == null) "Link to a Splitwise group" else "Change Splitwise group") {
+                            ExtendedFloatingActionButton(
+                                onClick = { showGroupSelector = true },
+                                icon = {
+                                    Icon(
+                                        if (draftBill.splitwiseGroupId == null) Icons.Rounded.CloudSync else Icons.Rounded.SyncAlt,
+                                        contentDescription = null
+                                    )
+                                },
+                                text = { Text("Sync Group") },
+                                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                                contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                            )
+                        }
+                    }
+
+                    AppTooltip("Add a new item to the bill") {
+                        ExtendedFloatingActionButton(
+                            onClick = { showAddItemDialog = true },
+                            icon = { Icon(Icons.Rounded.Add, contentDescription = null) },
+                            text = { Text("Bill Entry") },
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary
+                        )
                     }
                 }
             }
