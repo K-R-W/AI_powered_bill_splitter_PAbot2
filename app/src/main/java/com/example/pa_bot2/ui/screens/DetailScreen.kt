@@ -239,7 +239,7 @@ fun DetailScreen(
                                         contentDescription = null
                                     )
                                 },
-                                text = { Text("Sync Splitwise Group") },
+                                text = { Text("Sync Group") },
                                 containerColor = MaterialTheme.colorScheme.secondaryContainer,
                                 contentColor = MaterialTheme.colorScheme.onSecondaryContainer
                             )
@@ -250,7 +250,7 @@ fun DetailScreen(
                         ExtendedFloatingActionButton(
                             onClick = { showAddItemDialog = true },
                             icon = { Icon(Icons.Rounded.Add, contentDescription = null) },
-                            text = { Text("Add Bill Entry") },
+                            text = { Text("Bill Entry") },
                             containerColor = MaterialTheme.colorScheme.primary,
                             contentColor = MaterialTheme.colorScheme.onPrimary
                         )
